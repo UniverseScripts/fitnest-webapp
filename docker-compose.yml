@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # --- 1. Database ---
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      # These MUST match your .env values so the DB initializes correctly
+      POSTGRES_USER: fitnest_user
+      POSTGRES_PASSWORD: Nomurayoshio@2707
+      POSTGRES_DB: fitnest_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # --- 2. Backend ---
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      # 1. Pass the credentials from your .env
+      POSTGRES_USER: fitnest_user
+      POSTGRES_PASSWORD: Nomurayoshio@2707
+      POSTGRES_DB: fitnest_db
+      POSTGRES_PORT: 5432
+      
+      # 2. OVERRIDE the host. It must be 'db', not 'localhost'
+      POSTGRES_HOST: db 
+      
+      # 3. Other secrets
+      SECRET_KEY: "AabvWLiGSAMDSLKePMxXqP9cDmaw8QX6JveuxOJ76Se"
+      ALGORITHM: "HS256"
+
+  # --- 3. Frontend ---
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

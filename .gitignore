@@ -1,0 +1,36 @@
+# --- GLOBAL & OS FILES ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# --- SECRETS (CRITICAL) ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- FRONTEND (Node / Next.js) ---
+node_modules/
+.next/
+build/
+dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# --- BACKEND (Python) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+*.db
+
+# --- DOCKER ---
+# You usually want to commit Dockerfiles, but ignore local docker data if any
+docker-compose.override.yml

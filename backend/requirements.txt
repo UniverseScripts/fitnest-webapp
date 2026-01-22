@@ -1,0 +1,11 @@
+fastapi[standard]
+sqlalchemy>=2.0
+asyncpg
+alembic
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+pydantic[email]
+psycopg[asyncio]
+uvicorn[standard]
+numpy
