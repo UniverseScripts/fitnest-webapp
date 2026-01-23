@@ -21,7 +21,7 @@ app = FastAPI(title="Fitnest", description="A web application dedicated to room 
 
 origins = ["http://localhost:3000", "http://localhost:5173", "http://localhost:8000/chat/conversations", "https://fitnest-frontend-opsx.onrender.com"]
 
-app.add_middleware(CORSMiddleware, allow_origins=origins,
+app.add_middleware(CORSMiddleware, allow_origins=["*"],
                    allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 # Include all routers
