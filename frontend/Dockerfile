@@ -11,6 +11,8 @@ RUN npm install
 # 4. Copy the rest of the frontend code
 COPY . .
 
+ENV NEXT_PUBLIC_API_URL="https://fitnest-backend-7533.onrender.com"
+
 # 5. Build the Next.js application
 RUN npm run build
 
