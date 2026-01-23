@@ -108,8 +108,9 @@ export default function ExplorePage() {
       title: activeTab === 'roommates' 
         ? (currentItem as ExploreProfile).name 
         : (currentItem as ExploreListing).title,
-      // Fallback images if specific ones aren't available
-      image: currentItem.images || "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&h=500&fit=crop", 
+      image: activeTab === 'listings'
+        ? (currentItem as ExploreListing).images?.[0] // Take the first image of the listing
+        : "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&h=500&fit=crop", // Fallback for Profiles (since they don't have images yet)
       subtitle: activeTab === 'roommates' 
         ? (currentItem as ExploreProfile).major 
         : (currentItem as ExploreListing).price
