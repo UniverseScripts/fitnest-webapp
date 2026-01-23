@@ -14,9 +14,15 @@ export const useChatSocket = (userId: number | null, token: string | null) => {
   useEffect(() => {
     if (!userId || !token) return;
 
-    // Connect to your FastAPI WebSocket endpoint
-    // Note: Adjust the URL protocol (ws:// or wss://) based on your environment
-    const wsUrl = `ws://localhost:8000/chat/ws/${userId}/${token}`;
+    // Connect to FastAPI WebSocket endpoint
+    // 1. Get the base API URL (Localhost or Cloud)
+    const BASE_URL = "https://fitnest-backend-7533.onrender.com";
+
+    // 2. Convert "http" -> "ws" and "https" -> "wss" automatically
+    // This ensures that when you are on Render (https), you get Secure WebSockets (wss)
+    const SOCKET_URL = BASE_URL.replace(/^http/, 'ws');
+
+    const wsUrl = `${SOCKET_URL}/chat/ws/${userId}/${token}`;
     const socket = new WebSocket(wsUrl);
 
     socket.onopen = () => {
