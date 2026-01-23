@@ -30,7 +30,15 @@ export const getConversations = async () => {
 
 // Helper to get the WebSocket URL with authentication
 export const getWebSocketUrl = (userId: number) => {
+  // 1. Get the base API URL
+  const BASE_URL = "https://fitnest-backend-7533.onrender.com";
+
+  // 2. Convert "http" -> "ws" and "https" -> "wss" automatically
+  // This ensures that when you are on Render (https), you get Secure WebSockets (wss)
+  const SOCKET_URL = BASE_URL.replace(/^http/, 'ws');
+
+  // 3. Connect!
   const token = localStorage.getItem('token');
   // Note: WebSockets use 'ws://' instead of 'http://'
-  return `ws://localhost:8000/chat/ws/${userId}/${token}`;
+  return `${SOCKET_URL}/chat/ws/${userId}/${token}`;
 };
