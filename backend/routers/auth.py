@@ -10,7 +10,7 @@ from starlette import status
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
-from config import settings
+from core.config import settings
 
 router = APIRouter(prefix="/auth", tags=['auth'])
 
